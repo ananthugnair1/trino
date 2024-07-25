@@ -91,6 +91,34 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix-queryserver-client</artifactId>
+            <version>5.0.0-HBase-2.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-configuration2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>hadoop-common</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
             <groupId>org.weakref</groupId>
             <artifactId>jmxutils</artifactId>
         </dependency>
@@ -360,7 +388,22 @@
                 <configuration>
                     <ignoredResourcePatterns combine.children="append">
                         <ignoredResourcePattern>mrapp-generated-classpath</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/any.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/api.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/descriptor.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/duration.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/empty.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/field_mask.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/source_context.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/struct.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/timestamp.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/type.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>google/protobuf/wrappers.proto</ignoredResourcePattern>
+                        <ignoredResourcePattern>META-INF.versions.9.module-info</ignoredResourcePattern>
                     </ignoredResourcePatterns>
+                    <ignoredClassPatterns combine.children="append">
+                        <ignoredClassPattern>META-INF.versions.9.module-info</ignoredClassPattern>
+                    </ignoredClassPatterns>
                 </configuration>
             </plugin>
             <plugin>

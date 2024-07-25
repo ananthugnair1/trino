@@ -65,7 +65,7 @@ import io.trino.spi.procedure.Procedure;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.phoenix.jdbc.ConnectionInfo;
-import org.apache.phoenix.jdbc.PhoenixDriver;
+import org.apache.phoenix.queryserver.client.Driver;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -162,8 +162,8 @@ public class PhoenixClientModule
     private void checkConfiguration(String connectionUrl)
     {
         try {
-            PhoenixDriver driver = PhoenixDriver.INSTANCE;
-            checkArgument(driver.acceptsURL(connectionUrl), "Invalid JDBC URL for Phoenix connector");
+            Driver serverDriver = new Driver();
+            checkArgument(serverDriver.acceptsURL(connectionUrl), "Invalid JDBC URL for Phoenix connector");
         }
         catch (SQLException e) {
             throw new TrinoException(PHOENIX_CONFIG_ERROR, e);
@@ -178,7 +178,7 @@ public class PhoenixClientModule
     {
         return new ConfiguringConnectionFactory(
                 DriverConnectionFactory.builder(
-                                PhoenixDriver.INSTANCE, // Note: for some reason new PhoenixDriver won't work.
+                                new Driver(),
                                 config.getConnectionUrl(),
                                 new EmptyCredentialProvider())
                         .setConnectionProperties(getConnectionProperties(config))
